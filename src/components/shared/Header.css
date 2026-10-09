@@ -1,0 +1,49 @@
+.pk-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space);
+  background-color: var(--clr-grey-100);
+
+  .logo {
+    object-fit: cover;
+    object-position: center center;
+    height: 40px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .header-menu > ul {
+    display: flex;
+    align-items: center;
+    gap: var(--space);
+  }
+
+  .header-menu {
+    .menu-item {
+      &:hover {
+        .submenu > ul {
+          display: flex;
+        }
+      }
+    }
+    .submenu {
+      position: relative;
+
+      ul {
+        display: none;
+        flex-direction: column;
+        gap: var(--space-xs);
+        position: absolute;
+        top: 0;
+
+        padding: var(--space-sm);
+        background-color: var(--white);
+        box-shadow: var(--shadow-md);
+        border-radius: var(--radius-md);
+      }
+    }
+  }
+}
