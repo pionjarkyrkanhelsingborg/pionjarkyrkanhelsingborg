@@ -1,38 +1,21 @@
 :root {
-  --space-xxs: 0.25rem;
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-xxl: 3rem;
+  font-family: "DM Sans", sans-serif;
+  color: #18211d;
+  background: #f8f3ed;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-  --white: #ffffff;
-  --clr-grey-25: #fcfcfc;
-  --clr-grey-50: #f7f7f7;
-  --clr-grey-100: #f0f0f0;
-  --clr-grey-150: #e8e8e8;
-  --clr-grey-200: #dedede;
-  --clr-grey-300: #c7c7c7;
-  --clr-grey-400: #adadad;
-  --clr-grey-500: #929292;
-  --clr-grey-600: #777777;
-  --clr-grey-700: #5f5f5f;
-  --clr-grey-800: #464646;
-  --clr-grey-900: #2e2e2e;
-
-  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.1), 0 1px 2px rgb(0 0 0 / 0.06);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-pop: 0 4px 0 rgb(0 0 0 / 0.12), 0 8px 18px rgb(0 0 0 / 0.16);
-
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
+  --color-paper: #f8f3ed;
+  --color-white: #fffdfa;
+  --color-ink: #211d1b;
+  --color-muted: #655e58;
+  --color-forest: #3f5145;
+  --color-apricot: #efa77f;
+  --color-sage: #dbe5d9;
+  --color-coral: #d9876a;
+  --font-display: "Newsreader", Georgia, serif;
 }
 
 *,
@@ -44,14 +27,17 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
 
 button,
@@ -67,4 +53,34 @@ video,
 canvas {
   display: block;
   max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-coral);
+  outline-offset: 4px;
+}
+
+::selection {
+  color: var(--color-ink);
+  background: var(--color-apricot);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
