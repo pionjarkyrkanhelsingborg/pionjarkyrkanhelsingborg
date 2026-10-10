@@ -89,7 +89,7 @@ function App() {
             <figure className="services__image-wrap">
               <img
                 className="services__image"
-                src="/images/worship.jpg"
+                src="images/worship.jpg"
                 alt="Lovsång under en gudstjänst"
                 loading="lazy"
               />

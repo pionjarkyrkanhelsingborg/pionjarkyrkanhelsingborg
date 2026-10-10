@@ -2,18 +2,23 @@
   position: sticky;
   top: 0;
   z-index: 20;
+  background-color: var(--color-paper);
+  border-bottom: 1px solid rgb(24 33 29 / 0.12);
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.pk-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 78px;
-  padding: 0 max(22px, calc((100vw - 1280px) / 2));
-  background-color: var(--color-paper);
-  border-bottom: 1px solid rgb(24 33 29 / 0.12);
+}
 
+.pk-header__inner {
   .logo {
     width: auto;
     max-width: 216px;
-    max-height: 48px;
+    max-height: 40px;
     object-fit: contain;
   }
 
@@ -45,27 +50,6 @@
 
     &:hover {
       color: var(--color-forest);
-    }
-  }
-
-  .header-cta {
-    display: inline-flex;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-height: 46px;
-    padding: 0 18px;
-    border-radius: 4px;
-    color: var(--color-white);
-    background: var(--color-forest);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 160ms ease;
-
-    &:hover {
-      background: var(--color-ink);
     }
   }
 
@@ -109,6 +93,11 @@
   }
 }
 
+.pk-header.is-at-top {
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
 .menu-toggle[aria-expanded="true"] .menu-toggle__icon {
   background: transparent;
 
@@ -123,7 +112,9 @@
 
 @media (max-width: 1050px) {
   .pk-header {
-    min-height: 72px;
+    .pk-header__inner {
+      min-height: 72px;
+    }
 
     .logo {
       max-width: 185px;
@@ -131,21 +122,10 @@
     }
 
     .menu-toggle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
       display: inline-flex;
       flex: 0 0 auto;
       align-items: center;
       justify-content: center;
-      transform: translate(-50%, -50%);
-    }
-
-    .header-cta {
-      margin-left: auto;
-      margin-right: 12px;
-      min-height: 44px;
-      padding: 0 14px;
     }
 
     .header-menu {
@@ -188,18 +168,9 @@
 
 @media (max-width: 420px) {
   .pk-header {
-    padding-inline: 16px;
-
     .logo {
       max-width: min(150px, calc(50vw - 42px));
       max-height: 36px;
-    }
-
-    .header-cta {
-      min-height: 42px;
-      margin-right: 8px;
-      padding: 0 10px;
-      font-size: 13px;
     }
 
     .menu-toggle {

@@ -5,6 +5,7 @@
 
 .site-shell {
   overflow: clip;
+  background: linear-gradient(45deg, #ece7dc, transparent) top / 100% 100svh no-repeat;
 }
 
 .container {
@@ -48,7 +49,7 @@
   min-height: min(720px, calc(100svh - 78px));
   overflow: hidden;
   color: var(--color-ink);
-  background: var(--color-paper);
+  background: transparent;
 }
 
 .hero__layout {
@@ -266,7 +267,7 @@
 
 .visitor {
   color: var(--color-white);
-  background: var(--color-forest);
+  background: linear-gradient(45deg, #2a2f2c, #3f5145);
 }
 
 .visitor .section-label {
@@ -349,7 +350,7 @@
 }
 
 .giving {
-  background: var(--color-apricot);
+  background: linear-gradient(45deg, #ffebdd, #ffd3bb);
 }
 
 .giving .section-label {
