@@ -1,7 +1,58 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/shared/Header'
 
+const heroSlides = [
+  'images/forsamlingshelg/service-1.avif',
+  'images/forsamlingshelg/community-13.avif',
+  'images/pioneer/service-9.avif',
+  'images/forsamlingshelg/community-1.avif',
+  'images/forsamlingshelg/service-2.avif',
+  'images/forsamlingshelg/community-2.avif',
+  'images/forsamlingshelg/service-3.avif',
+  'images/forsamlingshelg/community-12.avif',
+  'images/forsamlingshelg/prayer-1.avif',
+]
+
 function App() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [slideshowPaused, setSlideshowPaused] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [slideTransitionEnabled, setSlideTransitionEnabled] = useState(true)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
+
+    updatePreference()
+    mediaQuery.addEventListener('change', updatePreference)
+    return () => mediaQuery.removeEventListener('change', updatePreference)
+  }, [])
+
+  useEffect(() => {
+    if (slideshowPaused || prefersReducedMotion) return
+
+    const intervalId = window.setInterval(() => {
+      setActiveSlide((slide) => slide + 1)
+    }, 6000)
+
+    return () => window.clearInterval(intervalId)
+  }, [slideshowPaused, prefersReducedMotion])
+
+  useEffect(() => {
+    if (slideTransitionEnabled) return
+
+    const frameId = window.requestAnimationFrame(() => setSlideTransitionEnabled(true))
+    return () => window.cancelAnimationFrame(frameId)
+  }, [slideTransitionEnabled])
+
+  function handleSlideTransitionEnd() {
+    if (activeSlide === heroSlides.length) {
+      setSlideTransitionEnabled(false)
+      setActiveSlide(0)
+    }
+  }
+
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">Gå till innehåll</a>
@@ -20,23 +71,57 @@ function App() {
               </div>
               <p className="hero__details">Söndagar 16:00 <span aria-hidden="true">/</span> EFS Råå</p>
             </div>
-
-            <svg className="hero__drawing" viewBox="0 0 700 640" aria-hidden="true" focusable="false">
-              <path
-                className="hero__drawing-path"
-                pathLength="1000"
-                d="M 6 621 C 10 580 37 552 70 535 C 109 515 128 518 162 519 C 143 522 135 504 140 485 C 145 464 166 460 178 476 C 194 495 182 514 162 519 C 193 522 211 511 242 494 L 298 461 C 324 446 340 421 341 390 L 344 189 L 250 188 Q 244 188 244 182 L 244 150 Q 244 144 250 144 L 344 144 L 345 51 Q 345 44 352 44 L 383 48 Q 389 49 389 55 L 389 144 L 482 145 Q 488 145 488 151 L 488 182 Q 488 188 482 188 L 395 189 L 397 385 C 397 411 395 432 403 441 C 419 459 443 460 461 453 C 481 440 494 424 518 430 C 543 435 554 457 586 460 C 619 463 654 456 693 448"
-              />
-            </svg>
+            <div className="hero__visual">
+              <div
+                className="hero__slideshow"
+                aria-hidden="true"
+              >
+                <div
+                  className={`hero__slide-track${slideTransitionEnabled ? '' : ' is-resetting'}`}
+                  style={{ transform: `translateX(-${activeSlide * 100}%)` }}
+                  onTransitionEnd={handleSlideTransitionEnd}
+                >
+                  {[...heroSlides, heroSlides[0]].map((image, index) => (
+                    <img
+                      key={`${image}-${index}`}
+                      className="hero__slide"
+                      src={image}
+                      alt=""
+                      style={{ left: `${index * 100}%` }}
+                    />
+                  ))}
+                </div>
+              </div>
+              <button
+                className="hero__slideshow-toggle"
+                type="button"
+                aria-label={slideshowPaused ? 'Spela bildspelet' : 'Pausa bildspelet'}
+                aria-pressed={slideshowPaused}
+                title={slideshowPaused ? 'Spela bildspelet' : 'Pausa bildspelet'}
+                onClick={() => setSlideshowPaused((paused) => !paused)}
+              >
+                <span
+                  className={`hero__slideshow-icon${slideshowPaused ? ' is-play' : ''}`}
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
           </div>
         </section>
 
         <section className="intro section" id="vilka-ar-vi" aria-labelledby="intro-title">
           <div className="container intro__grid">
-            <div className="intro__copy">
-              <p className="section-label">Vilka är vi</p>
-              <h2 id="intro-title">Pionjärkyrkan i Helsingborg</h2>
-              <p>
+            <div className="intro__copy" style={
+              { 
+                display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginInline: 'auto'
+              }
+            }>
+              <p className="section-label" style={{textAlign: 'center'}}>Vilka är vi</p>
+              <h2 id="intro-title" style={{textAlign: 'center'}}>Pionjärkyrkan i Helsingborg</h2>
+              <p style={{textAlign: 'center'}}>
                 Vi är en församling i Helsingborg som längtar efter att människor i Helsingborg
                 ska få möta Jesus. Vi vill vara en gemenskap där Jesus står i centrum, där
                 Helige Ande får leda och en plats där människor får bli förvandlade!
@@ -111,20 +196,34 @@ function App() {
                 Ge en gåva <span aria-hidden="true">↗</span>
               </a>
             </div>
+            <img
+              src="images/Swish-qr.png"
+              alt="Vårt swishnummer"
+              width={512}
+              height={512}
+              loading="lazy"
+            />
           </div>
         </section>
 
         <section className="contact section" id="kontakt" aria-labelledby="contact-title">
           <div className="container contact__grid">
-            <div className="contact__copy">
-              <p className="section-label">Pionjärkyrkan Helsingborg</p>
+            <div className="contact__copy" style={
+              { 
+                display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginInline: 'auto'
+              }
+            }>
+              <p className="section-label">Frågor</p>
               <h2 id="contact-title">Kontakta oss</h2>
-              <p>
+              <p style={{textAlign: 'center'}}>
                 Är det något du undrar över eller vill du bara veta mer om vilka vi är?
                 Tveka inte att kontakta oss!
               </p>
               <a className="contact__email" href="mailto:pionjarkyrkan@gmail.com">
-                pionjarkyrkan@gmail.com <span aria-hidden="true">↗</span>
+                Kontakta oss<span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
