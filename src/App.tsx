@@ -134,7 +134,7 @@ function App() {
             <figure className="services__image-wrap">
               <img
                 className="services__image"
-                src="images/worship.avif"
+                src="images/pioneer/worship.avif"
                 alt="Lovsång under en gudstjänst"
                 loading="lazy"
               />
