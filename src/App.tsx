@@ -1,5 +1,6 @@
 import './App.css'
 import Header from './components/shared/Header'
+import ArrowIcon from './components/shared/ArrowIcon'
 import HeroCollage, { type CollageColumn } from './components/HeroCollage'
 import { getDeviceType } from './utils/device'
 
@@ -62,7 +63,7 @@ function App() {
               <h1 id="hero-title">Välkommen hem</h1>
               <div className="hero__actions">
                 <a className="button button--warm" href="#ny-besokare">
-                  Ny besökare <span aria-hidden="true">↗</span>
+                  Ny besökare <ArrowIcon />
                 </a>
                 <a className="button button--light" href="#gudstjanster">Gudstjänster</a>
               </div>
@@ -91,10 +92,10 @@ function App() {
               </p>
               <div className="text-links">
                 <a className="text-link" href="https://www.pionjarkyrkanhelsingborg.com/om-oss" target="_blank" rel="noreferrer">
-                  Mer om oss <span aria-hidden="true">↗</span>
+                  Mer om oss <ArrowIcon />
                 </a>
                 <a className="text-link" href="#gudstjanster">
-                  Gudstjänster <span aria-hidden="true">↗</span>
+                  Gudstjänster <ArrowIcon />
                 </a>
               </div>
             </div>
@@ -112,7 +113,7 @@ function App() {
               </p>
               <div className="visitor__actions">
                 <a className="button button--warm" href="#gudstjanster">
-                  För dig som ny <span aria-hidden="true">↗</span>
+                  För dig som ny <ArrowIcon />
                 </a>
                 <a className="visitor__contact" href="#kontakt">Kontakta oss</a>
               </div>
@@ -130,7 +131,7 @@ function App() {
                 varje söndag i EFS Råås lokaler på Missionsgatan 8, klockan 16:00.
               </p>
               <a className="text-link" href="https://www.pionjarkyrkanhelsingborg.com/gudstjanster" target="_blank" rel="noreferrer">
-                Mer info <span aria-hidden="true">↗</span>
+                Mer info <ArrowIcon />
               </a>
               <p className="services__address">Missionsgatan 8 <span aria-hidden="true">·</span> Helsingborg</p>
             </div>
@@ -156,7 +157,7 @@ function App() {
                 Du behövs för att göra församlingen möjlig. Vi tar tacksamt emot din gåva.
               </p>
               <a className="button button--dark" href="https://www.pionjarkyrkanhelsingborg.com/ge-en-gava" target="_blank" rel="noreferrer">
-                Ge en gåva <span aria-hidden="true">↗</span>
+                Ge en gåva <ArrowIcon />
               </a>
             </div>
             <img
@@ -186,7 +187,7 @@ function App() {
                 Tveka inte att kontakta oss!
               </p>
               <a className="contact__email" href="mailto:pionjarkyrkan@gmail.com">
-                Kontakta oss<span aria-hidden="true">↗</span>
+                Kontakta oss <ArrowIcon />
               </a>
             </div>
           </div>
@@ -197,8 +198,8 @@ function App() {
         <div className="container site-footer__inner">
           <p>© 2026 Pionjärkyrkan Helsingborg</p>
           <nav className="site-footer__social" aria-label="Sociala medier">
-            <a href="https://www.facebook.com/Pionjarkyrkanhelsingborg/" target="_blank" rel="noreferrer">Facebook ↗</a>
-            <a href="https://www.instagram.com/pionjarkyrkanhelsingborg/" target="_blank" rel="noreferrer">Instagram ↗</a>
+            <a href="https://www.facebook.com/Pionjarkyrkanhelsingborg/" target="_blank" rel="noreferrer">Facebook <ArrowIcon /></a>
+            <a href="https://www.instagram.com/pionjarkyrkanhelsingborg/" target="_blank" rel="noreferrer">Instagram <ArrowIcon /></a>
           </nav>
         </div>
       </footer>

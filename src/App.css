@@ -362,13 +362,21 @@
   text-decoration: none;
 }
 
-.text-link span,
-.contact__email span {
+.arrow-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+.text-link .arrow-icon,
+.contact__email .arrow-icon {
   transition: transform 160ms ease;
 }
 
-.text-link:hover span,
-.contact__email:hover span {
+.text-link:hover .arrow-icon,
+.contact__email:hover .arrow-icon {
   transform: translate(2px, -2px);
 }
 
