@@ -41,7 +41,7 @@ function Header() {
     <header className={`pk-header${isAtTop ? ' is-at-top' : ''}`} id="top" onKeyDown={handleKeyDown}>
       <div className="pk-header__inner container">
         <a className="logo-link" href="#top" aria-label="Pionjärkyrkan Helsingborg, till startsidan">
-          <img src="images/logo/pk-logo.png" className="logo" alt="Pionjärkyrkan Helsingborg" />
+          <img src="images/logo/pk-logo-lq.png" className="logo" alt="Pionjärkyrkan Helsingborg" />
         </a>
         <button
           ref={menuButtonRef}

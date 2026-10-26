@@ -2,18 +2,14 @@ import './App.css'
 import Header from './components/shared/Header'
 import ArrowIcon from './components/shared/ArrowIcon'
 import HeroCollage, { type CollageColumn } from './components/HeroCollage'
-import { getDeviceType } from './utils/device'
-
-// Read once at startup, which is when loading/fetchPriority take effect
-const isMobile = getDeviceType() === 'mobile'
 
 // No lazy loading: clipped collage images would only load (and pop in) as they scroll into view
 const heroColumns: CollageColumn[] = [
   {
     images: [
-      { src: 'images/forsamlingshelg/service-1.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
-      { src: 'images/forsamlingshelg/community-1.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
-      { src: 'images/forsamlingshelg/service-3.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/service-1.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/community-1.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/service-3.avif', loading: 'eager', fetchPriority: 'high' },
     ],
     duration: '25s',
     delay: '0s',
@@ -24,9 +20,9 @@ const heroColumns: CollageColumn[] = [
   },
   {
     images: [
-      { src: 'images/forsamlingshelg/ultra-lq/community-13.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/service-2.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/community-12.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/community-13.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/service-2.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/community-12.avif', loading: 'eager', fetchPriority: 'high' },
     ],
     duration: '88s',
     delay: '-12s',
@@ -37,9 +33,9 @@ const heroColumns: CollageColumn[] = [
   },
   {
     images: [
-      { src: 'images/pioneer/ultra-lq/service-9.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/community-2.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/prayer-1.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/pioneer/ultra-lq/service-9.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/community-2.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/prayer-1.avif', loading: 'eager', fetchPriority: 'high' },
     ],
     duration: '55s',
     delay: '-20s',
