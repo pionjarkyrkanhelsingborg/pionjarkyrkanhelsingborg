@@ -9,7 +9,7 @@ const heroColumns: CollageColumn[] = [
     images: [
       { src: 'images/forsamlingshelg/ultra-lq/service-1.avif', loading: 'eager', fetchPriority: 'high' },
       { src: 'images/forsamlingshelg/ultra-lq/community-1.avif', loading: 'eager', fetchPriority: 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/service-3.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/service-3.avif', loading: 'eager', fetchPriority: 'low' },
     ],
     duration: '25s',
     delay: '0s',
@@ -22,7 +22,7 @@ const heroColumns: CollageColumn[] = [
     images: [
       { src: 'images/forsamlingshelg/ultra-lq/community-13.avif', loading: 'eager', fetchPriority: 'high' },
       { src: 'images/forsamlingshelg/ultra-lq/service-2.avif', loading: 'eager', fetchPriority: 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/community-12.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/community-12.avif', loading: 'eager', fetchPriority: 'low' },
     ],
     duration: '88s',
     delay: '-12s',
@@ -35,7 +35,7 @@ const heroColumns: CollageColumn[] = [
     images: [
       { src: 'images/pioneer/ultra-lq/service-9.avif', loading: 'eager', fetchPriority: 'high' },
       { src: 'images/forsamlingshelg/ultra-lq/community-2.avif', loading: 'eager', fetchPriority: 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/prayer-1.avif', loading: 'eager', fetchPriority: 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/prayer-1.avif', loading: 'eager', fetchPriority: 'low' },
     ],
     duration: '55s',
     delay: '-20s',
@@ -137,6 +137,7 @@ function App() {
                 src="images/pioneer/worship.avif"
                 alt="Lovsång under en gudstjänst"
                 loading="lazy"
+                fetchPriority='low'
               />
               <figcaption>Söndag · 16:00</figcaption>
             </figure>
@@ -162,6 +163,7 @@ function App() {
               width={512}
               height={512}
               loading="lazy"
+              fetchPriority='low'
             />
           </div>
         </section>
