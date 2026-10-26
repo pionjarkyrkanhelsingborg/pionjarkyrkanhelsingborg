@@ -17,6 +17,16 @@
   --color-sage: #dbe5d9;
   --color-coral: #d9876a;
   --font-display: "Newsreader", Georgia, serif;
+
+  /* Fluid steps scale linearly between 360px and 1240px viewports */
+  --font-size-2xs: 0.8125rem;
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 0.9375rem;
+  --font-size-base: 1rem;
+  --font-size-md: clamp(1rem, 0.9489rem + 0.2273vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1.0483rem + 0.3409vw, 1.3125rem);
+  --font-size-xl: clamp(2.5rem, 2.3977rem + 0.4545vw, 2.75rem);
+  --font-size-2xl: clamp(3rem, 2.8977rem + 0.4545vw, 3.25rem);
 }
 
 *,
@@ -36,6 +46,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  font-size: var(--font-size-base);
   line-height: 1.5;
   background: var(--color-paper);
   color: var(--color-ink);

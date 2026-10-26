@@ -1,58 +1,55 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/shared/Header'
+import HeroCollage, { type CollageColumn } from './components/HeroCollage'
+import { getDeviceType } from './utils/device'
 
-const heroSlides = [
-  'images/forsamlingshelg/service-1.avif',
-  'images/forsamlingshelg/community-13.avif',
-  'images/pioneer/service-9.avif',
-  'images/forsamlingshelg/community-1.avif',
-  'images/forsamlingshelg/service-2.avif',
-  'images/forsamlingshelg/community-2.avif',
-  'images/forsamlingshelg/service-3.avif',
-  'images/forsamlingshelg/community-12.avif',
-  'images/forsamlingshelg/prayer-1.avif',
+// Read once at startup, which is when loading/fetchPriority take effect
+const isMobile = getDeviceType() === 'mobile'
+
+// No lazy loading: clipped collage images would only load (and pop in) as they scroll into view
+const heroColumns: CollageColumn[] = [
+  {
+    images: [
+      { src: 'images/forsamlingshelg/service-1.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/community-1.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/service-3.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+    ],
+    duration: '25s',
+    delay: '0s',
+    direction: 'up',
+    width: 1.7,
+    aspectRatio: '5 / 3',
+    priority: 1,
+  },
+  {
+    images: [
+      { src: 'images/forsamlingshelg/ultra-lq/community-13.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/service-2.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/community-12.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+    ],
+    duration: '88s',
+    delay: '-12s',
+    direction: 'down',
+    width: 1.4,
+    aspectRatio: '4 / 4',
+    priority: 2,
+  },
+  {
+    images: [
+      { src: 'images/pioneer/ultra-lq/service-9.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/community-2.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+      { src: 'images/forsamlingshelg/ultra-lq/prayer-1.avif', loading: 'eager', fetchPriority: isMobile ? 'low' : 'high' },
+    ],
+    duration: '55s',
+    delay: '-20s',
+    direction: 'up',
+    width: 1,
+    aspectRatio: '4 / 3',
+    priority: 3,
+  },
 ]
 
 function App() {
-  const [activeSlide, setActiveSlide] = useState(0)
-  const [slideshowPaused, setSlideshowPaused] = useState(false)
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
-  const [slideTransitionEnabled, setSlideTransitionEnabled] = useState(true)
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
-
-    updatePreference()
-    mediaQuery.addEventListener('change', updatePreference)
-    return () => mediaQuery.removeEventListener('change', updatePreference)
-  }, [])
-
-  useEffect(() => {
-    if (slideshowPaused || prefersReducedMotion) return
-
-    const intervalId = window.setInterval(() => {
-      setActiveSlide((slide) => slide + 1)
-    }, 6000)
-
-    return () => window.clearInterval(intervalId)
-  }, [slideshowPaused, prefersReducedMotion])
-
-  useEffect(() => {
-    if (slideTransitionEnabled) return
-
-    const frameId = window.requestAnimationFrame(() => setSlideTransitionEnabled(true))
-    return () => window.cancelAnimationFrame(frameId)
-  }, [slideTransitionEnabled])
-
-  function handleSlideTransitionEnd() {
-    if (activeSlide === heroSlides.length) {
-      setSlideTransitionEnabled(false)
-      setActiveSlide(0)
-    }
-  }
-
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">Gå till innehåll</a>
@@ -71,41 +68,7 @@ function App() {
               </div>
               <p className="hero__details">Söndagar 16:00 <span aria-hidden="true">/</span> EFS Råå</p>
             </div>
-            <div className="hero__visual">
-              <div
-                className="hero__slideshow"
-                aria-hidden="true"
-              >
-                <div
-                  className={`hero__slide-track${slideTransitionEnabled ? '' : ' is-resetting'}`}
-                  style={{ transform: `translateX(-${activeSlide * 100}%)` }}
-                  onTransitionEnd={handleSlideTransitionEnd}
-                >
-                  {[...heroSlides, heroSlides[0]].map((image, index) => (
-                    <img
-                      key={`${image}-${index}`}
-                      className="hero__slide"
-                      src={image}
-                      alt=""
-                      style={{ left: `${index * 100}%` }}
-                    />
-                  ))}
-                </div>
-              </div>
-              <button
-                className="hero__slideshow-toggle"
-                type="button"
-                aria-label={slideshowPaused ? 'Spela bildspelet' : 'Pausa bildspelet'}
-                aria-pressed={slideshowPaused}
-                title={slideshowPaused ? 'Spela bildspelet' : 'Pausa bildspelet'}
-                onClick={() => setSlideshowPaused((paused) => !paused)}
-              >
-                <span
-                  className={`hero__slideshow-icon${slideshowPaused ? ' is-play' : ''}`}
-                  aria-hidden="true"
-                />
-              </button>
-            </div>
+            <HeroCollage columns={heroColumns} />
           </div>
         </section>
 
