@@ -1,4 +1,5 @@
 import {
+  Fragment,
   useEffect,
   useRef,
   useState,
@@ -85,28 +86,34 @@ export default function HeroCollage({ columns }: { columns: CollageColumn[] }) {
         className={`hero__collage${paused ? ' is-paused' : ''}`}
         aria-hidden="true"
       >
-        {layoutColumns(columns, size).map(({ column, copies, width }) => (
-          <div
-            className="hero__collage-column"
-            key={columns.indexOf(column)}
-            style={{ width, '--collage-frame-ratio': column.aspectRatio } as CSSProperties}
-          >
+        {layoutColumns(columns, size).map(({ column, copies, width }, columnIndex) => (
+          <Fragment key={columns.indexOf(column)}>
+            {columnIndex === 1 && (
+              <div className="hero__collage-cross">
+                <span className="hero__collage-cross-shape" />
+              </div>
+            )}
             <div
-              className="hero__collage-track"
-              style={{
-                '--collage-copies': copies,
-                animationDuration: column.duration,
-                animationDelay: column.delay,
-                animationDirection: column.direction === 'down' ? 'reverse' : 'normal',
-              } as CSSProperties}
+              className="hero__collage-column"
+              style={{ width, '--collage-frame-ratio': column.aspectRatio } as CSSProperties}
             >
-              {Array.from({ length: copies }, () => column.images).flat().map(({ src, ...attributes }, index) => (
-                <div className="hero__collage-frame" key={index}>
-                  <img className="hero__collage-image" src={src} alt="" {...attributes} />
-                </div>
-              ))}
+              <div
+                className="hero__collage-track"
+                style={{
+                  '--collage-copies': copies,
+                  animationDuration: column.duration,
+                  animationDelay: column.delay,
+                  animationDirection: column.direction === 'down' ? 'reverse' : 'normal',
+                } as CSSProperties}
+              >
+                {Array.from({ length: copies }, () => column.images).flat().map(({ src, ...attributes }, index) => (
+                  <div className="hero__collage-frame" key={index}>
+                    <img className="hero__collage-image" src={src} alt="" {...attributes} />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Fragment>
         ))}
       </div>
       <button

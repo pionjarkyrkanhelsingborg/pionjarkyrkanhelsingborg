@@ -103,6 +103,52 @@
   will-change: transform;
 }
 
+/* Zero-width flex item: the negative margins cancel the extra gap, leaving it on the gap's center line */
+.hero__collage-cross {
+  --collage-cross-thickness: calc(var(--collage-gap) * 3.5);
+  --collage-cross-height: 46cqh;
+
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 0;
+  margin-inline: calc(var(--collage-gap) / -2);
+  transform: skewX(calc(-1 * var(--collage-skew)));
+  pointer-events: none;
+}
+
+.hero__collage-cross-shape {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(var(--collage-cross-height) * 0.62);
+  height: var(--collage-cross-height);
+  transform: translate(-50%, -50%);
+}
+
+.hero__collage-cross-shape::before,
+.hero__collage-cross-shape::after {
+  position: absolute;
+  content: '';
+  background: var(--color-apricot);
+  border: 1px solid rgb(247, 246, 245); 
+}
+
+.hero__collage-cross-shape::before {
+  top: 0;
+  bottom: 0;
+  left: calc(50% - var(--collage-cross-thickness) / 2);
+  width: var(--collage-cross-thickness);
+  box-shadow: 0 0 100px 30px rgb(11, 11, 11);
+}
+
+.hero__collage-cross-shape::after {
+  top: 28%;
+  right: 0;
+  left: 0;
+  height: var(--collage-cross-thickness);
+}
+
 .hero__collage.is-paused .hero__collage-track {
   animation-play-state: paused;
 }

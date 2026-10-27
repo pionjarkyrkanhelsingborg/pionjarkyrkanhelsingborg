@@ -35,7 +35,7 @@ const heroColumns: CollageColumn[] = [
     images: [
       { src: 'images/pioneer/ultra-lq/service-9.avif', loading: 'eager', fetchPriority: 'high' },
       { src: 'images/forsamlingshelg/ultra-lq/community-2.avif', loading: 'eager', fetchPriority: 'high' },
-      { src: 'images/forsamlingshelg/ultra-lq/prayer-1.avif', loading: 'eager', fetchPriority: 'low' },
+      { src: 'images/forsamlingshelg/ultra-lq/prayer-1.avif', loading: 'eager', fetchPriority: 'high' },
     ],
     duration: '55s',
     delay: '-20s',
